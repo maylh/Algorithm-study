@@ -1,12 +1,13 @@
 function solution(participant, completion) {
-    participant.sort();
-    completion.sort();
+    let count = {};
     
-    let answer;
-    participant.forEach((person, i) => {
-        if (person !== completion[i]) {
-            if (!answer) answer = person;
-        }
-    });
-    return answer;
+    for (let name of participant) {
+        count[name] = (count[name] || 0) + 1;
+    }
+    
+    for (let name of completion) {
+        count[name] -= 1
+    }
+    
+    return Object.keys(count).find(key => count[key] > 0);
 }
